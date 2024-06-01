@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Liste des dinosaures</title>
+</head>
+<body>
+<h1>Liste des dinosaures</h1>
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Nom</th>
+        <th>Date de Naissance</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="dino : ${dinos}">
+        <td th:text="${dino.id}">ID</td>
+        <td th:text="${dino.nom}">Nom</td>
+        <td th:text="${dino.dateNaissance}">Date de Naissance</td>
+        <td>
+            <a th:href="@{/dino/update/{id}(id=${dino.id})}"><button>Modifier</button></a>
+
+            <form th:action="@{/dino/delete/{id}(id=${dino.id})}" method="post" style="display:inline;">
+                <input type="hidden" name="_method" value="DELETE" />
+                <button type="submit">Supprimer</button>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<a th:href="@{/dino/add}" class="btn btn-primary"><button>Ajouter un Dinosaure</button></a>
+</body>
+</html>
